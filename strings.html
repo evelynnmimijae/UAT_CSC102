@@ -1,0 +1,208 @@
+<!--
+  Evelynn Jones
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title shown in browser tab -->
+  <title>User Input Validation</title>
+  <!-- Inline CSS to provide a background color and basic styling -->
+  <style>
+    /* Set a light background color for the entire page */
+    body {
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      /* Center content horizontally */
+      display: flex;
+      justify-content: center;
+      /* Add some padding around the content */
+      padding: 20px;
+    }
+
+    /* Container to hold the form elements with styling */
+    #container {
+      /* White background for contrast */
+      background-color: #ffffff;
+      /* Rounded corners */
+      border-radius: 10px;
+      /* Drop shadow for a subtle 3D effect */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* Padding inside the container */
+      padding: 20px;
+      /* Limit the maximum width */
+      max-width: 400px;
+      /* Make container width responsive */
+      width: 100%;
+    }
+
+    /* Style for labels to align with inputs */
+    label {
+      /* Display block to place each label on its own line */
+      display: block;
+      /* Bold font weight for labels */
+      font-weight: bold;
+      /* Add some margin below each label */
+      margin-top: 10px;
+    }
+
+    /* Style for text input boxes */
+    input[type="text"] {
+      /* Full width to match container */
+      width: 100%;
+      /* Padding inside the input box */
+      padding: 8px;
+      /* Slight border radius for input fields */
+      border-radius: 4px;
+      /* Light gray border color */
+      border: 1px solid #ccc;
+      /* Margin below input fields */
+      margin-top: 5px;
+    }
+
+    /* Style for the submit button */
+    input[type="submit"] {
+      /* Background color for the button */
+      background-color: #4caf50;
+      /* White text color */
+      color: white;
+      /* Padding around the button text */
+      padding: 10px 20px;
+      /* Remove default border */
+      border: none;
+      /* Rounded corners */
+      border-radius: 4px;
+      /* Cursor changes to pointer on hover */
+      cursor: pointer;
+      /* Add some margin on top */
+      margin-top: 15px;
+    }
+
+    /* Change button appearance on hover */
+    input[type="submit"]:hover {
+      /* Darken background slightly */
+      background-color: #45a049;
+    }
+
+    /* Style for the area where messages (warnings/secret) will appear */
+    #message {
+      /* Margin on top to separate from form */
+      margin-top: 15px;
+      /* Padding inside the message area */
+      padding: 10px;
+      /* Light yellow background for emphasis */
+      background-color: #fffacd;
+      /* Rounded corners */
+      border-radius: 4px;
+      /* Ensure text wraps properly */
+      word-wrap: break-word;
+    }
+
+    /* Creative element: a header image aligned center */
+    #header-image {
+      /* Center the image horizontally */
+      display: block;
+      /* Automatic left/right margins */
+      margin: 0 auto 20px auto;
+      /* Limit image width */
+      max-width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main container for the form and content -->
+  <div id="container">
+    <!-- Creative element: displaying a small logo or icon -->
+    <img
+      id="header-image"
+      src="/home/mimijae/Downloads/ChatGPT_Black-Cat_Image.png"
+      alt="Logo or icon"
+    />
+    <!-- Form wrapping all input elements; onsubmit triggers validation -->
+    <form onsubmit="return validateForm()" novalidate>
+      <!-- Label for first name input -->
+      <label for="firstName">First Name:</label>
+      <!-- Text box for user's first name -->
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        placeholder="Enter your first name"
+      />
+
+      <!-- Label for last name input -->
+      <label for="lastName">Last Name:</label>
+      <!-- Text box for user's last name -->
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        placeholder="Enter your last name"
+      />
+
+      <!-- Label for zip code input -->
+      <label for="zipCode">Zip Code:</label>
+      <!-- Text box for user's zip code -->
+      <input
+        type="text"
+        id="zipCode"
+        name="zipCode"
+        placeholder="Enter your 5-digit zip code"
+      />
+
+      <!-- Single submit button to validate all inputs at once -->
+      <input type="submit" value="Submit" />
+    </form>
+
+    <!-- Div where validation warnings or secret message will be displayed -->
+    <div id="message"></div>
+  </div>
+
+  <!-- JavaScript section containing the validation logic -->
+  <script>
+    // Function to validate user input when the form is submitted
+    function validateForm() {
+      // Get the value from the first name input box and trim whitespace
+      var first = document.getElementById('firstName').value.trim();
+      // Get the value from the last name input box and trim whitespace
+      var last = document.getElementById('lastName').value.trim();
+      // Combine first name, a space, and last name into one fullName variable
+      var fullName = first + ' ' + last;
+      // Get the value from the zip code input box and trim whitespace
+      var zip = document.getElementById('zipCode').value.trim();
+      // Reference to the div where messages will be shown
+      var messageDiv = document.getElementById('message');
+
+      // Clear any previous messages
+      messageDiv.innerHTML = '';
+
+      // Check if fullName length exceeds 20 characters
+      if (fullName.length > 20) {
+        // Show warning using innerHTML if name is too long
+        messageDiv.innerHTML = 'Warning: Full name must be 20 characters or fewer.';
+        // Prevent form submission by returning false
+        return false;
+      }
+
+      // Regular expression to match exactly 5 digits
+      var zipRegex = /^\d{5}$/;
+      // Test the zip code against the regex
+      if (!zipRegex.test(zip)) {
+        // Show warning if zip code is invalid
+        messageDiv.innerHTML = 'Warning: Zip code must be exactly 5 digits.';
+        // Prevent form submission by returning false
+        return false;
+      }
+
+      // If both name and zip code are valid, show the secret message
+      messageDiv.innerHTML =
+        '🎉 Congratulations, ' + fullName + '! Here is the secret message: <strong>Welcome to the exclusive club!</strong>';
+      // Prevent actual form submission to keep message visible
+      return false;
+    }
+  </script>
+</body>
+</html>
