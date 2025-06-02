@@ -2,7 +2,14 @@
 function computerChoice() {
   const options = ['rock', 'paper', 'scissors'];
   // The Math.Floor function ensures that the computer makes one of three choices randomly.
-  return options[Math.floor(Math.random() * options.length)];
+  // The Math.round function doesn't make the computer choose one of three choices consistently. 
+  //   • values in [0.0, 0.499...) → 0
+  //   • [0.5, 1.499...]         → 1
+  //   • [1.5, 2.499...]         → 2
+  //   • [2.5, 2.999...]         → 3   ← out of bounds (options[3] is undefined)
+  // Math.random() returns a float in [0, 1).
+  // Multiplying by options.length (3) gives a float in [0, 3).
+  return options[Math.round(Math.random() * options.length)];
 }
 
 // A winner is chosen based on the user and computer choices.
