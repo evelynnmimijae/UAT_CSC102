@@ -1,0 +1,164 @@
+<!-- Author: Evelynn Jones -->
+<!DOCTYPE html>
+<!-- Root HTML element with language -->
+<html lang="en">
+<head>
+  <!-- Character encoding -->
+  <meta charset="UTF-8">
+  <!-- Responsive viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Creative font from Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Poets+en+Tierras&display=swap" rel="stylesheet">
+  <!-- Page title -->
+  <title>Palindrome Checker</title>
+  <!-- Embedded CSS for creative look & feel -->
+  <style>
+    /* Apply gradient background and custom font */
+    body {
+      margin: 0;
+      font-family: 'Poets en Tierras', serif;
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    /* Card container with soft shadow and rounded corners */
+    .container {
+      background: rgba(255,255,255,0.9);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+    /* Emoji image as a creative element */
+    #creativeImage {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+    /* Styled text input */
+    #userString {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 2px solid #83a4d4;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+    /* Buttons styling */
+    button {
+      padding: 0.75rem 1.5rem;
+      margin: 0.25rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    /* “Check” button style */
+    #checkBtn {
+      background-color: #83a4d4;
+      color: white;
+    }
+    /* “Exit” button style */
+    #exitBtn {
+      background-color: #f76c6c;
+      color: white;
+    }
+    /* Result message styling */
+    #message {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main card container -->
+  <div class="container">
+    <!-- Creative emoji image -->
+    <img src="~/CSC102/images/palindrome.png" alt="Palindrome Symbol" id="creativeImage">
+    <!-- Page heading -->
+    <h1>Palindrome Checker</h1>
+    <!-- Form for user input -->
+    <form id="palindromeForm">
+      <!-- Text box for entering a word or phrase -->
+      <input
+        type="text"
+        id="userString"
+        name="userString"
+        placeholder="Enter a word or phrase"
+        required
+      >
+      <br>
+      <!-- Submit button to check palindrome -->
+      <button type="submit" name="action" value="submit" id="checkBtn">
+        Check
+      </button>
+      <!-- Submit button to exit the loop -->
+      <button type="submit" name="action" value="exit" id="exitBtn">
+        Exit
+      </button>
+    </form>
+    <!-- Div to display validation/palindrome messages -->
+    <div id="message"></div>
+  </div>
+
+  <!-- JavaScript logic for handling the loop and palindrome check -->
+  <script>
+    // Grab the form element
+    const form = document.getElementById('palindromeForm');
+    // Grab the text input
+    const input = document.getElementById('userString');
+    // Grab the message display div
+    const messageDiv = document.getElementById('message');
+
+    // Assign the onsubmit handler (no addEventListener)
+    form.onsubmit = function(e) {
+      // Prevent normal form submission (page reload)
+      e.preventDefault();
+      // Determine which button was clicked
+      const action = e.submitter.value;
+
+      // If the “Check” button was clicked…
+      if (action === 'submit') {
+        // Store user's raw input
+        const userText = input.value;
+        // Remove all spaces and force to lowercase
+        const cleanedText = userText.replace(/\s+/g, '').toLowerCase();
+        // Reverse the cleaned string
+        const reversedText = cleanedText.split('').reverse().join('');
+
+        // If the cleaned input is empty, show validation message
+        if (cleanedText.length === 0) {
+          messageDiv.innerHTML = 'Please enter some text to check!';
+        }
+        // If cleaned string matches its reverse, it’s a palindrome
+        else if (cleanedText === reversedText) {
+          messageDiv.innerHTML = `"${userText}" is a palindrome!`;
+        }
+        // Otherwise, it’s not a palindrome
+        else {
+          messageDiv.innerHTML = `"${userText}" is not a palindrome.`;
+        }
+
+        // Clear the input for the next entry
+        input.value = '';
+        // Put focus back into the input box
+        input.focus();
+      }
+      // If the “Exit” button was clicked…
+      else if (action === 'exit') {
+        // Hide the form to end the loop
+        form.style.display = 'none';
+        // Thank the user
+        messageDiv.innerHTML = 'Thanks for using the palindrome checker!';
+      }
+    };
+  </script>
+</body>
+</html>
