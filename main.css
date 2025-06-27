@@ -29,7 +29,36 @@ h1{
     text-align: center;
 }
 
-/home/mimijae/Downloads/ChatGPT_Black-Cat_Image.png{
-    margin-right: 200px;
-    width: 400px;
+
+/* Buttons and feedback styling */
+button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: aqua;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:disabled{
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+/* Form style */
+form {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 250px;
+}
+
+/* Messaage feedback box */
+messageBox {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
 }

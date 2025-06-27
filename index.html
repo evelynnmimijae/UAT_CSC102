@@ -1,4 +1,4 @@
-<!-- Evelynn Jones Thurs. 5/15/25 -->
+<!-- Evelynn Jones Thurs. 6/26/25 -->
 
 <!-- DOCTYPE This is the first tag on the page that tells the browser that this is an HTML5 page. -->
 <!DOCTYPE HTML5>
@@ -10,7 +10,9 @@
         <title>CSC102 Homepage</title>
         <!--Add a link to our .css file-->
         <link rel="stylesheet" href="main.css">
+        <script defer src="meme-main.js"></script>
      </head>
+
      <!-- Now, we have the Body section, which holds the text and images we want on our webpage. -->
       <body>
         <!-- This section will have things like a menu, logo, or title page. -->
@@ -25,12 +27,18 @@
         </nav>
          </header>
 
-         <!-- this is a pragraph tag-->
-        <p>
-            <!-- img is the Image tag. -->
-            <img src="/home/mimijae/Downloads/ChatGPT_Black-Cat_Image.png">
-            <!-- img id... in the video tutourial did not work for me, so I used the above code instead. -->
-        </p>
+         <main>
+          <!-- Meme image-->
+          <img id="memeImage" src="images/ChatGPT_Black-Cat_Image.png" style="position: absolute; left: 0; top: 0; width: 120px; height: 120px; object-fit: cover; clip-path: circle(50%);"/>
+          <!-- Feedback message -->
+          <div id="messageBox"></div>
+
+          <!-- Form button -->
+          <form id="controlForm">
+            <button type="submit" id="startBtn">Start</button>
+            <button type="submit" id="stopBtn" disabled>Stop</button>
+          </form>
+         </main>
         
         <!-- This is a footer tag. Information at the bottom of the page. Done on Thurs., May 22, 2025. -->
         <footer>
