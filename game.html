@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title of the webpage -->
-    <title>JavaScript Function Demo - Rock, Paper, Scissors</title>
+    
+    <!-- Title of the webpage/game -->
+    <title>Rock, Paper, Scissors</title>
+    
     <!-- Linking styling and functioning code to give the page life -->
     <script src="code.js"></script>
     <link href="main.css" rel="stylesheet">
 </head>
+
 <body>
+<!-- Theme music button -->
+ <button id="themeMusicBtn" onclick="startIntroSound()">Play Theme Music</button>
+
+<!-- Intro sound element -->
+ <audio id="introSound" src="sounds/mixkit-game-show-suspense-waiting-667.mp3" preload="auto"></audio>
+
     <header>
         <!-- The heading will change upon user choosing Rock, Paper, or Scissors -->
-        <h1 id="heading">Welcome to my Page. Let's play!</h1>
+        <h1 id="heading">Let's play!</h1>
     </header>
 
     <!-- Buttons to click for the user/player to choose and start the game -->
@@ -23,8 +32,15 @@
     </div>
 
     <!-- Game results -->
-    <div id="result">
-
-    </div>
+    <div id="result"></div>
+    
+    <!-- Audio elements -->
+     <audio id="introSound" src="sounds/mixkit-game-show-suspense-waiting-667.mp3" preload="auto"></audio>
+     <audio id="rockSound" src="sounds/mixkit-stones-and-rocks-falling-400.mp3" preload="auto"></audio>
+     <audio id="paperSound" src="sounds/mixkit-quick-paper-crumple-sound-2996.mp3" preload="auto"></audio>
+     <audio id="scissorsSound" src="sounds/mixkit-scissors-cutting-paper-2378.mp3" preload="auto"></audio>
+     <audio id="winSound" src="sounds/mixkit-winning-a-coin-video-game-2069.mp3" preload="auto"></audio>
+     <audio id="loseSound" src="sounds/mixkit-player-losing-or-failing-2042.mp3" preload="auto"></audio>
+     <audio id="tieSound" src="sounds/mixkit-completion-of-a-level-2063.mp3" preload="auto"></audio>
 </body>
 </html>
