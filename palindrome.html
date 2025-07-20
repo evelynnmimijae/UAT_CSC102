@@ -1,4 +1,4 @@
-<!-- Author: Evelynn Jones -->
+<!-- Author: Evelynn Jones updated Jul. 19, 2025-->
 <!DOCTYPE html>
 <!-- Root HTML element with language -->
 <html lang="en">
@@ -22,10 +22,25 @@
       font-family: 'Poets en Tierras', serif;
       background: linear-gradient(to right, #83a4d4, #b6fbff);
       display: flex;
+      flex-direction: column; /* Stacks children vertically */
       justify-content: center;
       align-items: center;
       height: 100vh;
+      padding-top: 2rem;
     }
+
+    /* Dark mode styles (added Jul. 19th for Object concept) */
+    body.dark {
+      background: linear-gradient(to right, black);
+      color: white;
+    }
+    body.dark input,
+    body.dark button {
+      background-color: black;
+      color: white;
+      border: 2px solid #555;
+    }
+
     /* Card container with soft shadow and rounded corners */
     .container {
       background: rgba(255,255,255,0.9);
@@ -35,6 +50,11 @@
       text-align: center;
       width: 100%;
       max-width: 400px;
+    }
+
+    /* Dark mode container backgroun */
+    body.dark .container {
+      background: rgba(50, 50, 50, 0.9);
     }
     /* Emoji image as a creative element */
     #creativeImage {
@@ -69,19 +89,46 @@
       background-color: #f76c6c;
       color: white;
     }
+
+    /* New Dark Mode toggle button added Jul. 19 */
+    #darkModeBtn {
+      background-color: #333;
+      color: rgb(119, 117, 117);
+      margin-top: 1rem;
+    }
+
     /* Result message styling */
     #message {
       margin-top: 1rem;
       font-size: 1.1rem;
       min-height: 1.2em;
     }
+
+    /* Resources list styles */
+    #resources {
+      margin-top: 1rem;
+      text-align: left;
+      max-width: 400px;
+    }
+
+    #resources ul {
+      padding-left: 1.2rem;
+    }
+
+    #resources a {
+      color: #004080;
+    }
+
+    body.dark #resources a {
+      color: #99ccff;
+    }
   </style>
 </head>
 <body>
-  <!-- Main card container -->
+  <!-- Main UI card container -->
   <div class="container">
     <!-- Creative emoji image -->
-    <img src="~/CSC102/images/palindrome.png" alt="Palindrome Symbol" id="creativeImage">
+    <img src="images/palindrome.png" alt="Palindrome Symbol" id="creativeImage">
     <!-- Page heading -->
     <h1>Palindrome Checker</h1>
     <!-- Form for user input -->
@@ -92,7 +139,6 @@
         id="userString"
         name="userString"
         placeholder="Enter a word or phrase"
-        required
       >
       <br>
       <!-- Submit button to check palindrome -->
@@ -106,6 +152,10 @@
     </form>
     <!-- Div to display validation/palindrome messages -->
     <div id="message"></div>
+    <!-- Container for blog links (additional/new Loop concept added 7/19) -->
+     <div id="resources"></div>
+     <!-- Toggle button for Dark Mode (Object added 7/19) -->
+      <button id="darkModeBtn">Toggle Dark Mode</button>
   </div>
 
   <!-- JavaScript logic for handling the loop and palindrome check -->
@@ -116,6 +166,26 @@
     const input = document.getElementById('userString');
     // Grab the message display div
     const messageDiv = document.getElementById('message');
+    const resourcesDiv = document.getElementById('resources');
+    const darkModeBtn = document.getElementById('darkModeBtn');
+
+    // Object: User settings with a darkMode toggle added 7/19
+    const userSettings = {
+      darkMode: false
+    };
+
+    // Toggle dark mode by modifying <body> class (updated 7/19)
+    darkModeBtn.onclick = () => {
+      userSettings.darkMode = !userSettings.darkMode;
+      document.body.classList.toggle('dark', userSettings.darkMode);
+    };
+
+    // New Loop: Array of blog resources (added 7/19)
+    const blogs = [
+      { title: "Grammar Girl", URL: "https://www.quickanddirtytips.com/grammar-girl"},
+      { title: "Vocabulary.com", URL: "https://www.vocabulary.com/"},
+      { title: "Merriam-Webster Word Games", URL: "https://www.merriam-webster.com/word-games"}
+    ];
 
     // Assign the onsubmit handler (no addEventListener)
     form.onsubmit = function(e) {
@@ -123,42 +193,51 @@
       e.preventDefault();
       // Determine which button was clicked
       const action = e.submitter.value;
+      const userText = input.value;
+      const cleanedText = userText.replace(/\s+/g, '').toLowerCase();
+      const reversedText = cleanedText.split('').reverse().join('');
+
+      // Clear resources area every time
+      resourcesDiv.innerHTML = '';
 
       // If the “Check” button was clicked…
+      // String Manipulation + animation added 7/19
       if (action === 'submit') {
-        // Store user's raw input
-        const userText = input.value;
-        // Remove all spaces and force to lowercase
-        const cleanedText = userText.replace(/\s+/g, '').toLowerCase();
-        // Reverse the cleaned string
-        const reversedText = cleanedText.split('').reverse().join('');
-
-        // If the cleaned input is empty, show validation message
         if (cleanedText.length === 0) {
-          messageDiv.innerHTML = 'Please enter some text to check!';
-        }
-        // If cleaned string matches its reverse, it’s a palindrome
-        else if (cleanedText === reversedText) {
-          messageDiv.innerHTML = `"${userText}" is a palindrome!`;
-        }
-        // Otherwise, it’s not a palindrome
-        else {
-          messageDiv.innerHTML = `"${userText}" is not a palindrome.`;
+          animateMessage('Please enter some text to check!');
+        } else if (cleanedText === reversedText) {
+          animateMessage(`"${userText}" is a palindrome!`);
+        } else {
+          animateMessage(`"${userText}" is not a palindrome.`);
         }
 
         // Clear the input for the next entry
         input.value = '';
-        // Put focus back into the input box
         input.focus();
+        
+        // Loop: Add blog links dynamically (7/19 update)
+        resourcesDiv.innerHTML = "<h3>Want to explore more?</h3><ul>";
+          for (let blog of blogs) {
+            resourcesDiv.innerHTML += `<li><a href="${blog.URL}" target="_blank">${blog.title}</a></li>`;
+          }
+          resourcesDiv.innerHTML += "</ul>";
+        } else if (action === 'exit') {
+          // Hide form and show goodbye message
+          form.style.display = 'none';
+          animateMessage('Thanks for using the palindrome checker!');
+          resourcesDiv.innerHTML = '';
+        }
+      };
+      // String Manipulation: Animate output messages one character at a time (7/19 update)
+      function animateMessage(text) {
+        messageDiv.innerHTML = '';
+        let i = 0;
+        const interval = setInterval(() => {
+          messageDiv.innerHTML += text[i];
+          i++;
+          if (i >= text.length) clearInterval(interval);
+        }, 50); // Speed adjustment 
       }
-      // If the “Exit” button was clicked…
-      else if (action === 'exit') {
-        // Hide the form to end the loop
-        form.style.display = 'none';
-        // Thank the user
-        messageDiv.innerHTML = 'Thanks for using the palindrome checker!';
-      }
-    };
   </script>
 </body>
 </html>
