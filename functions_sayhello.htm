@@ -1,3 +1,5 @@
+<!--Evelynn Jones, updated 7/25 18:00-->
+
 <!DOCTYPE html>
 
 <html>
@@ -6,16 +8,130 @@
     <meta charset="utf-8">
     <title>Say Hello!</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 60%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
     </style>
 </head>
 
 <body>
-    <script>
-        function sayHello() {
-            alert("hello");
-        }
-        sayHello();
-    </script>
+    <h1>Ways to Say "Hello"</h1>
+
+    <table>
+        <tr>
+            <th>Word</th>
+            <th>Language</th>
+            <th>Pronunciation</th>
+        </tr>
+        <tr>
+                       <td>Hola</td>
+            <td>Spanish</td>
+            <td>oh-lah</td>
+        </tr>
+        <tr>
+            <td>Bonjour</td>
+            <td>French</td>
+            <td>bohn-zhoor</td>
+        </tr>
+        <tr>
+            <td>Konnichiwa</td>
+            <td>Japanese</td>
+            <td>koh-nee-chee-wah</td> 
+        </tr>
+        <tr>
+           <td>Ciao</td>
+           <td>Italian</td>
+           <td>chow</td>
+        </tr>
+        <tr>
+            <td>Olá</td>
+            <td>Portuguese</td>
+            <td>oh-lah</td>
+        </tr>
+        <tr>
+           <td>Salam</td>
+           <td>Arabic</td>
+           <td>sah-lahm</td>
+        </tr>
+        <tr>
+            <td>Zdravo</td>
+            <td>Serbian</td>
+            <td>zdrah-voh</td>
+        </tr>
+        <tr>
+            <td>Shalom</td>
+            <td>Hebrew</td>
+            <td>shah-lohm</td>
+        </tr>
+        <tr>
+            <td>Sveiki</td>
+            <td>Latvian</td>
+            <td>svay-kee</td>
+        </tr>
+        <tr>
+            <td>Xin chào</td>
+            <td>Vietnamese</td>
+            <td>sin chow</td>
+        </tr>
+        <tr>
+            <td>Sawubona</td>
+            <td>Zulu</td>
+            <td>sah-woo-boh-nah</td>
+        </tr>
+        <tr>
+            <td>Kamusta</td>
+            <td>Tagalog (Filipino)</td>
+            <td>kah-moos-tah</td>
+        </tr>
+        <tr>
+            <td>Halo</td>
+            <td>Hausa</td>
+            <td>hah-lo</td>
+        </tr>
+        <tr>
+            <td>Bonjourno</td>
+            <td>Romansh</td>
+            <td>bohn-zhoor-no</td>
+        </tr>
+        <tr>
+            <td>Talofa</td>
+            <td>Samoan</td>
+            <td>tah-loh-fah</td>
+        </tr>
+    </table>
+
+    <script src="sayhello.js"></script>
 </body>
 </html>
